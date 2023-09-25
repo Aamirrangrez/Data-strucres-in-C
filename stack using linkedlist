@@ -1,0 +1,78 @@
+#include<stdio.h>
+#define sf scanf
+#define pf printf
+struct node
+{
+    int data;
+    struct node*prev;
+};
+struct node*top;
+void push();
+void dis();
+void pop();
+main()
+{
+    top=NULL;
+    int ch;
+    do
+    {
+        pf("1:push\n2:pop\n3:display\n4:exite\nchoice:");
+        sf("%d",&ch);
+        switch(ch)
+        {
+            case 1:push();pf("\n\n");break;
+            case 2:pop();pf("\n\n");break;
+            case 3:dis();pf("\n\n");break;
+            case 4:pf("PE");break;
+            default:pf("WC");break;
+        }
+    }while(ch!=4);
+}
+void push()
+{
+   struct node*nn;
+   nn=(struct node*)malloc(sizeof(struct node));
+   pf("Enter data:");
+   sf("%d",&nn->data);
+   if(top==NULL)
+   {
+       nn->prev=NULL;
+       top=nn;
+   }
+   else{
+    nn->prev=top;
+    top=nn;
+   }
+   pf("%d pushed",nn->data);
+}
+void dis()
+{
+    struct node*tp;
+    if(top==NULL)
+    {
+        pf("Mt\n");return;
+    }
+    else{
+            tp=top;
+
+        while(tp!=NULL)
+        {
+            pf("%d\n",tp->data);
+    tp=tp->prev;
+        }
+    }
+}
+void pop()
+{
+struct node*tp;
+if(top==NULL)
+{
+    pf("MT\n");return;
+}
+else{
+    tp=top;
+    top=top->prev;
+    pf("%d poped",tp->data);
+    free(tp);
+}
+}
