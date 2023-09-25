@@ -1,0 +1,93 @@
+#include<stdio.h>
+#define pf printf
+#define sf scanf
+struct node
+{
+    int data;
+    struct node*next;
+};
+struct node*front,*end;
+void enq();
+void deq();
+void dis();
+main()
+{
+    int a;
+    front=end=NULL;
+    do
+    {
+        pf("1:enq\n2:deq\n3:display\n4:exite\nchoice:");
+        sf("%d",&a);
+        switch(a)
+        {
+            case 1:enq();break;
+            case 2:deq();break;
+            case 3:dis();break;
+            case 4:pf("PE");break;
+            default:pf("wrong choice");break;
+        }
+    }while(a!=4);
+    }
+void enq()
+{
+    struct node*nn;
+    nn=(struct node*)malloc(sizeof(struct node));
+    pf("Enter data:");
+    sf("%d",&nn->data);
+        if(end==NULL)
+        {
+            front=nn;
+            end=nn;
+            nn->next=nn;
+        }
+        else
+        {
+            end->next=nn;
+            end=nn;
+            end->next=front;
+        }pf("\n\n");
+}
+void dis()
+{
+    struct node*tp;
+    if(front==NULL)
+    {
+        pf("MT\n");return;
+    }
+    else
+    {
+        tp=front;
+        do
+        {
+            pf("%d\n",tp->data);
+            tp=tp->next;
+        }while(tp!=front);
+    }
+    pf("\n\n");
+}
+void deq()
+{
+    struct node*tp;
+
+    if(front==NULL)
+    {
+        pf("MT\n");return;
+    }
+    if(end==front)
+    {
+        tp=front;
+        free(tp);
+        front=end=NULL;
+
+
+    }
+    else
+    {
+        tp=front;
+        front=front->next;
+        end->next=front;
+        free(tp);
+
+    }
+    pf("\n\n");
+}
